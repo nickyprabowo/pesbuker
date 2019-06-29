@@ -1,26 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import {
+  BrowserRouter,
+  Route,
+  Switch
+} from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "./store/store"
+import { Grid, Container } from "semantic-ui-react";
+import 'semantic-ui-css/semantic.min.css'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Home from "./modules/home/pages/Home";
+import UserContainer from "./modules/user/Container";
+import Navbar from "./shared-components/Navbar";
+
+export default class App extends Component {
+  render () {
+    return (
+      <Provider store={store}>
+        <BrowserRouter>
+          <Grid container className="App">
+            <Navbar />
+            <Grid.Row style={{ marginTop: "5rem" }}>
+              <Grid.Column className="main-content">
+                  <Switch>
+                    <Route exact path="/" component={Home} />
+                    <Route path="/friends" component={UserContainer} />
+                  </Switch>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+        </BrowserRouter>
+      </Provider>
+    );
+  };
 }
-
-export default App;
