@@ -14,3 +14,17 @@ export const fetchAllUsers = () => {
         .catch(error => reject(error))
     })
 }
+
+export const fetchUserById = id => {
+    return new Promise((resolve, reject) => {
+        fetch(`${API.user}/${id}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then(handleResponse)
+        .then(data => resolve(data))
+        .catch(error => reject(error))
+    })
+}

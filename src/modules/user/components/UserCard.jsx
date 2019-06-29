@@ -12,7 +12,7 @@ export default function UserCard({
     handleDetail
 }) {
     return (
-        <Card key={userId} onClick={() => handleDetail(userId)}>
+        <Card onClick={() => handleDetail(userId)}>
             <Card.Content>
                 <Card.Header>{username}</Card.Header>
                 <Card.Meta>{website}</Card.Meta>

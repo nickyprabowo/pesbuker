@@ -1,7 +1,7 @@
 const initialState = {
     users: [],
     selectedUser: {},
-    asyncState: "idle"
+    userAsyncState: "idle"
 }
 
 export default function user(state = initialState, action){
@@ -9,7 +9,7 @@ export default function user(state = initialState, action){
     case "FETCH_ALL_USERS_REQUEST": {
       return {
         ...state,
-        asyncState: "loading"
+        userAsyncState: "loading"
       }
     }
 
@@ -17,28 +17,28 @@ export default function user(state = initialState, action){
       return {
         ...state,
         users: action.payload.data,
-        asyncState: "loaded"
+        userAsyncState: "loaded"
       }
     }
 
     case "FETCH_ALL_USERS_ERROR": {
       return {
         ...state,
-        asyncState: "error"
+        userAsyncState: "error"
       }
     }
 
     case "FETCH_USER_BY_ID_REQUEST": {
       return {
         ...state,
-        asyncState: "loading"
+        userAsyncState: "loading"
       }
     }
 
     case "FETCH_USER_BY_ID_SUCCESS": {
       return {
         ...state,
-        asyncState: "loaded",
+        userAsyncState: "loaded",
         selectedUser: action.payload.data
       }
     }
@@ -46,7 +46,7 @@ export default function user(state = initialState, action){
     case "FETCH_USER_BY_ID_ERROR": {
       return {
         ...state,
-        asyncState: "error"
+        userAsyncState: "error"
       }
     }
 

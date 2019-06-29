@@ -2,10 +2,11 @@ import React, { Component, Fragment } from 'react';
 import { Card } from "semantic-ui-react";
 
 import UserCard from "../components/UserCard";
+import Loading from "../../../shared-components/Loading";
 
 export default class UsersList extends Component {
     constructor(props){
-        super(props);
+        super();
     }
 
     componentDidMount = () => {
@@ -24,17 +25,23 @@ export default class UsersList extends Component {
     }
 
     render() {
-        const { users } = this.props;
+        const { users, userAsyncState } = this.props;
         return (
             <Fragment>
-                <Card.Group>
-                    {users.map(user => (
-                        <UserCard 
-                            {...user} 
-                            handleDetail={this.handleUserDetail}
-                        />)
-                    )}
-                </Card.Group>
+                {userAsyncState === "loading" &&
+                    <Loading />
+                }
+                {users.length > 0 &&
+                    <Card.Group>
+                        {users.map(user => (
+                            <UserCard
+                                key={user.userId}
+                                {...user} 
+                                handleDetail={this.handleUserDetail}
+                            />)
+                        )}
+                    </Card.Group>
+                }
             </Fragment>
         )
     }
