@@ -44,6 +44,7 @@ export const fetchPhotosByAlbum = albumId => {
 }
 
 export const fetchPhotoById = id => {
+    console.log("gege",id);
     return new Promise((resolve, reject) => {
         fetch(`${API.photo}/${id}`, {
             method: "GET",

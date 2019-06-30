@@ -4,7 +4,8 @@ const initialState = {
     selectedPhoto: {},
     photoAsyncState: "idle",
     albumAsyncState: "idle",
-    photos: []
+    photos: [],
+    togglePhoto: false
 }
 
 export default function photo(state=initialState, action) {
@@ -102,7 +103,14 @@ export default function photo(state=initialState, action) {
               ...state,
               selectedAlbum: action.payload.data
             }
-          }
+        }
+
+        case "TOGGLE_PHOTO_MODAL": {
+            return {
+              ...state,
+              togglePhoto: !state.togglePhoto
+            }
+        }
 
         default: {
             return state;

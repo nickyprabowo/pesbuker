@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Card } from "semantic-ui-react";
+import { Grid, Card } from "semantic-ui-react";
 
 import UserCard from "../components/UserCard";
 import Loading from "../../../shared-components/Loading";
@@ -27,22 +27,26 @@ export default class UsersList extends Component {
     render() {
         const { users, userAsyncState } = this.props;
         return (
-            <Fragment>
-                {userAsyncState === "loading" &&
-                    <Loading />
-                }
-                {users.length > 0 &&
-                    <Card.Group>
-                        {users.map(user => (
-                            <UserCard
-                                key={user.userId}
-                                {...user} 
-                                handleDetail={this.handleUserDetail}
-                            />)
-                        )}
-                    </Card.Group>
-                }
-            </Fragment>
+            <Grid>
+                <Grid.Row>
+                    <Grid.Column>
+                        {userAsyncState === "loading" &&
+                            <Loading />
+                        }
+                        {users.length > 0 &&
+                            <Card.Group itemsPerRow={3}>
+                                {users.map(user => (
+                                    <UserCard
+                                        key={user.userId}
+                                        {...user} 
+                                        handleDetail={this.handleUserDetail}
+                                    />)
+                                )}
+                            </Card.Group>
+                        }
+                    </Grid.Column>
+                </Grid.Row>
+            </Grid>
         )
     }
 }

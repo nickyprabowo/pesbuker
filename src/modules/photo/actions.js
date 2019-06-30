@@ -24,6 +24,7 @@ const getPhotoByIdSuccess = makeActionCreator("FETCH_PHOTO_BY_ID_SUCCESS");
 const getPhotoByIdError = makeActionCreator("FETCH_PHOTO_BY_ID_ERROR");
 
 const selectAlbum = makeActionCreator("SELECT_ALBUM");
+const togglePhotoModal = makeActionCreator("TOGGLE_PHOTO_MODAL");
 
 export const getAlbumsByUser = userId => dispatch => {
     dispatch(getAlbumsByUserRequest());
@@ -61,4 +62,8 @@ export const pickAlbum = (id, cb) => dispatch => {
         }
     }));
     if (cb instanceof Function) cb();
+}
+
+export const toggleModal = () => dispatch => {
+    dispatch(togglePhotoModal());
 }

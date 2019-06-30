@@ -51,7 +51,7 @@ export default class UserDetail extends Component {
       albums
     } = this.props;
       return (
-          <Grid>
+          <Grid stackable>
             <Grid.Row>
               <Grid.Column>
                 <Header as='h2' icon textAlign='center'>

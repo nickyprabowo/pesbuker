@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from 'react'
-import { Grid, Header, Button, Icon } from "semantic-ui-react";
+import { Grid, Header, Button, Icon, Comment } from "semantic-ui-react";
+// Components
 import Loading from "../../../shared-components/Loading";
+import CoolComment from "../../../shared-components/CoolComment";
 
 export default class PostDetail extends Component {
     constructor(props){
@@ -43,7 +45,12 @@ export default class PostDetail extends Component {
                         <Grid.Column>
                             <p>{body}</p>
                         </Grid.Column>
-                    </Grid.Row>    
+                    </Grid.Row>
+                    <Grid.Row>
+                        <Grid.Column>
+                            
+                        </Grid.Column>
+                    </Grid.Row>
                 </Grid>
             </Fragment>
         )
