@@ -4,12 +4,13 @@ import { Item } from "semantic-ui-react";
 export default function PostItem({
     id,
     title,
-    body
+    body,
+    onSelect
 }) {
     return (
-        <Item key={id}>
+        <Item>
             <Item.Content>
-                <Item.Header as='a'>{title}</Item.Header>
+                <Item.Header as='a' onClick={() => onSelect(id)}>{title}</Item.Header>
                 <Item.Description>
                 <p>{body}</p>
                 </Item.Description>

@@ -14,3 +14,17 @@ export const fetchPostsByUser = userId => {
         .catch(error => reject(error))
     })
 }
+
+export const fetchPostsById = id => {
+    return new Promise((resolve, reject) => {
+        fetch(`${API.post}/${id}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then(handleResponse)
+        .then(data => resolve(data))
+        .catch(error => reject(error))
+    })
+}

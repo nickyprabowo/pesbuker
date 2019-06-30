@@ -30,6 +30,10 @@ export const getUserById = id => dispatch => {
 }
 
 export const pickUser = (id, cb) => dispatch => {
-    dispatch(selectUser({ data: id }));
+    dispatch(selectUser({ 
+        data: {
+            userId: id
+        }
+    }));
     if (cb instanceof Function) cb();
 }

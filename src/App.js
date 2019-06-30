@@ -11,6 +11,7 @@ import 'semantic-ui-css/semantic.min.css'
 
 import Home from "./modules/home/pages/Home";
 import UserContainer from "./modules/user/Container";
+import PostContainer from "./modules/post/pages/Container";
 import Navbar from "./shared-components/Navbar";
 
 export default class App extends Component {
@@ -25,6 +26,7 @@ export default class App extends Component {
                   <Switch>
                     <Route exact path="/" component={Home} />
                     <Route path="/friends" component={UserContainer} />
+                    <Route path="/post" component={PostContainer} />
                   </Switch>
               </Grid.Column>
             </Grid.Row>

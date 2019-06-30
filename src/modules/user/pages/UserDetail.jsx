@@ -14,11 +14,27 @@ export default class UserDetail extends Component {
       getUserById,
       getPostsByUser,
       getAlbumsByUser,
-      selectedUser
+      selectedUser: { userId }
     } = this.props;
-    getUserById(selectedUser);
-    getPostsByUser(selectedUser);
-    getAlbumsByUser(selectedUser);
+    getUserById(userId);
+    getPostsByUser(userId);
+    getAlbumsByUser(userId);
+  }
+
+  handlePostSelection = id => {
+    const {
+        history: { push },
+        pickPost
+    } = this.props;
+    pickPost(id, () => push('/post/' + id));
+  }
+
+  handleAlbumSelection = id => {
+    const {
+        history: { push },
+        pickAlbum
+    } = this.props;
+    pickAlbum(id, () => push('/album/' + id));
   }
 
   render() {
@@ -65,13 +81,25 @@ export default class UserDetail extends Component {
               <Grid.Column width={6}>
                 <h2>Albums</h2>
                 <Card.Group itemsPerRow={3}>
-                  {albums.map(album => <AlbumItem {...album} />)}
+                  {albums.map(album => (
+                    <AlbumItem
+                      key={album.id}
+                      {...album}
+                      onSelect={this.handleAlbumSelection}
+                    />)
+                  )}
                 </Card.Group>
               </Grid.Column>
               <Grid.Column width={10}>
                 <h2>Posts</h2>
                 <Item.Group divided>
-                  {posts.map(post => <PostItem {...post} />)}
+                  {posts.map(post => (
+                    <PostItem
+                      key={post.id}
+                      {...post}
+                      onSelect={this.handlePostSelection}
+                    />
+                  ))}
                 </Item.Group>
               </Grid.Column>
             </Grid.Row>
