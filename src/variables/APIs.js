@@ -3,7 +3,8 @@ const API = {
     user: `${baseURL}/users`,
     post: `${baseURL}/posts`,
     album: `${baseURL}/albums`,
-    photo: `${baseURL}/photos`
+    photo: `${baseURL}/photos`,
+    comment: `${baseURL}/comments`
 }
 
 export default API;

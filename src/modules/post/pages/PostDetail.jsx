@@ -10,8 +10,12 @@ export default class PostDetail extends Component {
     }
 
     componentDidMount = () => {
-        const { getPostById, selectedPost: { id } } = this.props;
+        const { getPostById,
+            getCommentsByPost,
+            selectedPost: { id }
+        } = this.props;
         getPostById(id);
+        getCommentsByPost(id);
     }
 
     previousPage = () => {
@@ -26,7 +30,8 @@ export default class PostDetail extends Component {
             selectedPost: { 
                 title,
                 body 
-            }
+            },
+            comments
         } = this.props;
         return (
             <Fragment>
@@ -48,7 +53,19 @@ export default class PostDetail extends Component {
                     </Grid.Row>
                     <Grid.Row>
                         <Grid.Column>
-                            
+                            <Comment.Group>
+                                <Header as='h3' dividing>
+                                Comments
+                                </Header>
+                                {comments.map(comment => (
+                                    <CoolComment
+                                        name={comment.name}
+                                        email={comment.email}
+                                        body={comment.body}
+                                    />
+                                )
+                                )}
+                            </Comment.Group>
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>

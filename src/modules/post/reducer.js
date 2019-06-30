@@ -1,7 +1,8 @@
 const initialState = {
     posts: [],
     postAsyncState: "idle",
-    selectedPost: {}
+    selectedPost: {},
+    comments: []
 }
 
 export default function post(state=initialState, action) {
@@ -44,6 +45,28 @@ export default function post(state=initialState, action) {
         }
 
         case "GET_POST_BY_ID_ERROR": {
+            return {
+                ...state,
+                postAsyncState: "error"
+            }
+        }
+
+        case "GET_COMMENTS_BY_POST_REQUEST": {
+            return {
+                ...state,
+                postAsyncState: "loading"
+            }
+        }
+
+        case "GET_COMMENTS_BY_POST_SUCCESS": {
+            return {
+                ...state,
+                comments: action.payload.data,
+                postAsyncState: "loaded"
+            }
+        }
+
+        case "GET_COMMENTS_BY_POST_ERROR": {
             return {
                 ...state,
                 postAsyncState: "error"

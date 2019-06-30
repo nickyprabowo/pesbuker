@@ -28,3 +28,17 @@ export const fetchPostsById = id => {
         .catch(error => reject(error))
     })
 }
+
+export const fetchCommentsByPost = postId => {
+    return new Promise((resolve, reject) => {
+        fetch(`${API.comment}?postId=${postId}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then(handleResponse)
+        .then(data => resolve(data))
+        .catch(error => reject(error))
+    })
+}
