@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Grid, Header, Icon, List, Item, Card } from "semantic-ui-react";
 
 import PostItem from "../../post/components/PostItem";
-import AlbumItem from '../../album/components/AlbumItem';
+import AlbumItem from '../../photo/components/AlbumItem';
 
 export default class UserDetail extends Component {
   constructor(props){
@@ -34,13 +34,12 @@ export default class UserDetail extends Component {
         history: { push },
         pickAlbum
     } = this.props;
-    pickAlbum(id, () => push('/album/' + id));
+    pickAlbum(id, () => push('/photos/' + id));
   }
 
   render() {
     const {
       selectedUser: {
-        userId,
         username,
         name,
         email,
