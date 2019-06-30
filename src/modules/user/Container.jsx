@@ -7,13 +7,15 @@ import UserDetail from "./pages/UserDetail";
 
 import * as UserActions from "./actions";
 import * as PostActions from "../post/actions";
+import * as AlbumActions from "../album/actions";
 
 function mapStateToProps(state){
-    const { user, post } = state;
+    const { user, post, album } = state;
 
     return {
         ...user,
-        ...post
+        ...post,
+        ...album
     }
 }
 
@@ -31,5 +33,5 @@ class Container extends Component {
 
 export default connect(
     mapStateToProps,
-    { ...UserActions, ...PostActions }
+    { ...UserActions, ...PostActions, ...AlbumActions }
 )(Container);

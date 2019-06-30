@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { Grid, Header, Icon, List, Item } from "semantic-ui-react";
+import { Grid, Header, Icon, List, Item, Card } from "semantic-ui-react";
 
 import PostItem from "../../post/components/PostItem";
+import AlbumItem from '../../album/components/AlbumItem';
 
 export default class UserDetail extends Component {
   constructor(props){
@@ -12,10 +13,12 @@ export default class UserDetail extends Component {
     const {
       getUserById,
       getPostsByUser,
+      getAlbumsByUser,
       selectedUser
     } = this.props;
     getUserById(selectedUser);
     getPostsByUser(selectedUser);
+    getAlbumsByUser(selectedUser);
   }
 
   render() {
@@ -29,7 +32,8 @@ export default class UserDetail extends Component {
         phone,
         company
       },
-      posts
+      posts,
+      albums
     } = this.props;
       return (
           <Grid>
@@ -58,12 +62,16 @@ export default class UserDetail extends Component {
               </Grid.Column>
             </Grid.Row>
             <Grid.Row>
-              <Grid.Column width={4}>
-                album
+              <Grid.Column width={6}>
+                <h2>Albums</h2>
+                <Card.Group itemsPerRow={3}>
+                  {albums.map(album => <AlbumItem {...album} />)}
+                </Card.Group>
               </Grid.Column>
-              <Grid.Column width={12}>
-                <Item.Group>
-                  {posts.map(post => (<PostItem {...post} />))}
+              <Grid.Column width={10}>
+                <h2>Posts</h2>
+                <Item.Group divided>
+                  {posts.map(post => <PostItem {...post} />)}
                 </Item.Group>
               </Grid.Column>
             </Grid.Row>
