@@ -31,7 +31,9 @@ export default function CommentForm({
                 value={body}
                 onChange={onInputChange}
             />
+            {onSubmit &&
             <Button primary onClick={onSubmit}>Submit</Button>
+            }
         </Form>
     )
 }

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Grid, Card } from "semantic-ui-react";
 
 import UserCard from "../components/UserCard";

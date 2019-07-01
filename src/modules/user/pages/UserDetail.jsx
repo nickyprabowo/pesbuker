@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Grid, Header, Icon, List, Item, Card } from "semantic-ui-react";
+import { Grid, Item, Card } from "semantic-ui-react";
 
 import UserProfile from "../components/UserProfile";
 import PostItem from "../../post/components/PostItem";

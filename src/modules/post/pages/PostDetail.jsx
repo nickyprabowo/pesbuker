@@ -4,6 +4,7 @@ import { Grid, Header, Button, Icon, Comment } from "semantic-ui-react";
 import Loading from "../../../shared-components/Loading";
 import CoolComment from "../components/CoolComment";
 import CommentForm from "../components/CommentForm";
+import CoolModal from "../../../shared-components/CoolModal";
 
 export default class PostDetail extends Component {
     constructor(props){
@@ -13,7 +14,10 @@ export default class PostDetail extends Component {
                 name: "",
                 email: "",
                 body: ""
-            }
+            },
+            editModal: false,
+            deleteModal: false,
+            selectedComment: {}
         }
     }
 
@@ -56,8 +60,76 @@ export default class PostDetail extends Component {
         })
     }
 
+    selectCommentToUpdate = comment => {
+        this.toggleEditModal();
+        this.setState({
+            selectedComment: comment
+        });
+    }
+
+    toggleEditModal = () => {
+        this.setState((state) => ({
+            editModal: !state.editModal,
+            selectedComment: {}
+        }));
+    }
+
+    handleEditChange = e => {
+        const { name, value } = e.target;
+        this.setState((state) => ({
+            selectedComment: {
+                ...state.selectedComment,
+                [name]: value
+            }
+        }))
+    }
+
+    handleUpdateComment = () => {
+        const { selectedComment: { id, name, body, email } } = this.state;
+        const { updateComment } = this.props;
+        if(name && body && email){
+            const newComment = {
+                id,
+                name,
+                body,
+                email,
+                userId: 1
+            }
+            updateComment(newComment);
+            this.setState({
+                selectedComment: {
+                    id: "",
+                    name: "",
+                    body: "",
+                    email: ""
+                }
+            }, () => this.toggleEditModal())
+        }else return
+    }
+
+    selectCommentToDelete = comment => {
+        this.toggleDeleteModal();
+        this.setState({
+            selectedComment: comment
+        });
+    }
+
+    toggleDeleteModal = () => {
+        this.setState((state) => ({
+            deleteModal: !state.deleteModal,
+            selectedComment: {}
+        }));
+    }
+
+    handleDeleteComment = () => {
+        const { selectedComment: { id } } = this.state;
+        const { deleteComment } = this.props;
+        deleteComment(id);
+        this.toggleDeleteModal();
+    }
+
     render() {
-        const { comment } = this.state;
+        const { comment, editModal, deleteModal, selectedComment } = this.state;
         const { 
             selectedPost: { 
                 title,
@@ -68,6 +140,27 @@ export default class PostDetail extends Component {
         return (
             <Fragment>
                 {!title && <Loading />}
+                <CoolModal 
+                    modalOpen={editModal}
+                    handleClose={this.toggleEditModal}
+                    data={selectedComment}
+                    renderContent={(post) => (
+                        <CommentForm
+                            {...post}
+                            onInputChange={this.handleEditChange}
+                        />
+                    )}
+                    renderAction={<Button onClick={() => this.handleUpdateComment()} primary>Update</Button>}
+                />
+                <CoolModal 
+                    modalOpen={deleteModal}
+                    handleClose={this.toggleDeleteModal}
+                    data={selectedComment}
+                    renderContent={() => (
+                        <p>Are you sure to delete this comment ?</p>
+                    )}
+                    renderAction={<Button onClick={() => this.handleDeleteComment()} primary>Delete</Button>}
+                />
                 <Grid>
                     <Grid.Row>
                         <Grid.Column>
@@ -97,9 +190,9 @@ export default class PostDetail extends Component {
                                 {comments.map(comment => (
                                     <CoolComment
                                         key={comment.id}
-                                        name={comment.name}
-                                        email={comment.email}
-                                        body={comment.body}
+                                        {...comment}
+                                        onEdit={this.selectCommentToUpdate}
+                                        onDelete={this.selectCommentToDelete}
                                     />
                                 )
                                 )}

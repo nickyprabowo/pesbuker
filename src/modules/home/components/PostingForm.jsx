@@ -5,7 +5,7 @@ export default function PostingForm({
     title,
     body,
     onInputChange,
-    onSubmit
+    onSubmit = false
 }) {
     return (
         <Fragment>
@@ -24,7 +24,9 @@ export default function PostingForm({
                     value={body}
                     onChange={onInputChange}
                 />
+                {onSubmit &&
                 <Button primary type='submit' onClick={onSubmit}>Submit</Button>
+                }
             </Form>
         </Fragment>
     )

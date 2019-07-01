@@ -9,7 +9,6 @@ import {
 
 import UserProfile from "../../user/components/UserProfile";
 import PostingForm from "../components/PostingForm";
-import EditForm from "../components/EditForm";
 import PostItem from "../../post/components/PostItem";
 import AlbumItem from "../../photo/components/AlbumItem";
 import CoolModal from "../../../shared-components/CoolModal";
@@ -152,7 +151,7 @@ export default class Home extends Component {
                     handleClose={this.toggleEditModal}
                     data={selectedPost}
                     renderContent={(post) => (
-                        <EditForm
+                        <PostingForm
                             title={post.title}
                             body={post.body}
                             onInputChange={this.handleEditChange}
