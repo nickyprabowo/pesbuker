@@ -86,3 +86,47 @@ export const deleteArticle = id => {
         .catch(error => reject(error))
     })
 }
+
+export const postComment = comment => {
+    return new Promise((resolve, reject) => {
+        fetch(`${API.comment}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json; charset=UTF-8"
+            },
+            body: JSON.stringify(comment)
+        })
+        .then(handleResponse)
+        .then(data => resolve(data))
+        .catch(error => reject(error))
+    })
+}
+
+export const updateComment = comment => {
+    return new Promise((resolve, reject) => {
+        fetch(`${API.comment}/${comment.id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json; charset=UTF-8"
+            },
+            body: JSON.stringify(comment)
+        })
+        .then(handleResponse)
+        .then(data => resolve(data))
+        .catch(error => reject(error))
+    })
+}
+
+export const deleteComment = id => {
+    return new Promise((resolve, reject) => {
+        fetch(`${API.comment}/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json; charset=UTF-8"
+            }
+        })
+        .then(handleResponse)
+        .then(data => resolve(data))
+        .catch(error => reject(error))
+    })
+}

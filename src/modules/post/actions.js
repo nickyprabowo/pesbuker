@@ -34,6 +34,18 @@ const deletePostRequest = makeActionCreator("DELETE_POST_REQUEST");
 const deletePostSuccess = makeActionCreator("DELETE_POST_SUCCESS");
 const deletePostError = makeActionCreator("DELETE_POST_ERROR");
 
+const createCommentRequest = makeActionCreator("CREATE_COMMENT_REQUEST");
+const createCommentSuccess = makeActionCreator("CREATE_COMMENT_SUCCESS");
+const createCommentError = makeActionCreator("CREATE_COMMENT_ERROR");
+
+const updateCommentRequest = makeActionCreator("UPDATE_COMMENT_REQUEST");
+const updateCommentSuccess = makeActionCreator("UPDATE_COMMENT_SUCCESS");
+const updateCommentError = makeActionCreator("UPDATE_COMMENT_ERROR");
+
+const deleteCommentRequest = makeActionCreator("DELETE_COMMENT_REQUEST");
+const deleteCommentSuccess = makeActionCreator("DELETE_COMMENT_SUCCESS");
+const deleteCommentError = makeActionCreator("DELETE_COMMENT_ERROR");
+
 const selectPost = makeActionCreator("SELECT_POST");
 
 export const getPostsByUser = userId => dispatch => {
@@ -50,13 +62,6 @@ export const getPostById = id => dispatch => {
         .then(data => postDetailModel(data))
         .then(cleanData => dispatch(getPostByIdSuccess({data: cleanData})))
         .catch(error => dispatch(getPostByIdError(error)))
-}
-
-export const getCommentsByPost = postId => dispatch => {
-    dispatch(getCommentsByPostRequest());
-    fetchCommentsByPost(postId)
-        .then(data => dispatch(getCommentsByPostSuccess({ data })))
-        .catch(error => dispatch(getCommentsByPostError(error)))
 }
 
 export const createPost = post => dispatch => {
@@ -80,6 +85,34 @@ export const deletePost = id => dispatch => {
     deleteArticle(id)
         .then(() => dispatch(deletePostSuccess({ data: id })))
         .catch(error => dispatch(deletePostError(error)))
+}
+
+export const getCommentsByPost = postId => dispatch => {
+    dispatch(getCommentsByPostRequest());
+    fetchCommentsByPost(postId)
+        .then(data => dispatch(getCommentsByPostSuccess({ data })))
+        .catch(error => dispatch(getCommentsByPostError(error)))
+}
+
+export const createComment = post => dispatch => {
+    dispatch(createCommentRequest());
+    postArticle(post)
+        .then(data => dispatch(createCommentSuccess({ data })))
+        .catch(error => dispatch(createCommentError(error)))
+}
+
+export const updateComment = post => dispatch => {
+    dispatch(updateCommentRequest());
+    updateArticle(post)
+        .then(data => dispatch(updateCommentSuccess({ data })))
+        .catch(error => dispatch(updateCommentError(error)))
+}
+
+export const deleteComment = id => dispatch => {
+    dispatch(deleteCommentRequest());
+    deleteArticle(id)
+        .then(() => dispatch(deleteCommentSuccess({ data: id })))
+        .catch(error => dispatch(deleteCommentError(error)))
 }
 
 export const pickPost = (id, cb) => dispatch => {

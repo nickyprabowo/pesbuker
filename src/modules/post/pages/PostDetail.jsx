@@ -2,11 +2,19 @@ import React, { Component, Fragment } from 'react'
 import { Grid, Header, Button, Icon, Comment } from "semantic-ui-react";
 // Components
 import Loading from "../../../shared-components/Loading";
-import CoolComment from "../../../shared-components/CoolComment";
+import CoolComment from "../components/CoolComment";
+import CommentForm from "../components/CommentForm";
 
 export default class PostDetail extends Component {
     constructor(props){
         super()
+        this.state = {
+            comment: {
+                name: "",
+                email: "",
+                body: ""
+            }
+        }
     }
 
     componentDidMount = () => {
@@ -25,7 +33,31 @@ export default class PostDetail extends Component {
         goBack();
     }
 
+    handleInputChange = e => {
+        const { name, value } = e.target;
+        this.setState((state) => ({
+            comment: {
+                ...state.comment,
+                [name]: value
+            }
+        }))
+    }
+
+    handleSubmitComment = () => {
+        const { comment } = this.state;
+        const { createComment } = this.props
+        createComment(comment);
+        this.setState({
+            comment: {
+                name: "",
+                email: "",
+                body: ""
+            }
+        })
+    }
+
     render() {
+        const { comment } = this.state;
         const { 
             selectedPost: { 
                 title,
@@ -57,8 +89,14 @@ export default class PostDetail extends Component {
                                 <Header as='h3' dividing>
                                 Comments
                                 </Header>
+                                <CommentForm
+                                    {...comment}
+                                    onInputChange={this.handleInputChange}
+                                    onSubmit={this.handleSubmitComment}
+                                />
                                 {comments.map(comment => (
                                     <CoolComment
+                                        key={comment.id}
                                         name={comment.name}
                                         email={comment.email}
                                         body={comment.body}

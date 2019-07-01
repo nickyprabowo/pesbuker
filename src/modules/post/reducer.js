@@ -73,6 +73,87 @@ export default function post(state=initialState, action) {
             }
         }
 
+        case "CREATE_COMMENT_REQUEST": {
+            return {
+                ...state,
+                postAsyncState: "loading"
+            }
+        }
+
+        case "CREATE_COMMENT_SUCCESS": {
+            return {
+                ...state,
+                comments: [
+                    action.payload.data,
+                    ...state.comments
+                ],
+                postAsyncState: "loading"
+            }
+        }
+
+        case "CREATE_COMMENT_ERROR": {
+            return {
+                ...state,
+                postAsyncState: "error"
+            }
+        }
+
+        case "UPDATE_COMMENT_REQUEST": {
+            return {
+                ...state,
+                postAsyncState: "loading"
+            }
+        }
+
+        case "UPDATE_COMMENT_SUCCESS": {
+            return {
+                ...state,
+                comments: state.comments.map((comment) => {
+                    if( comment.id !== action.payload.data.id ){
+                        return comment
+                    }
+                    return {
+                        ...comment,
+                        ...action.payload.data
+                    }
+                }),
+                postAsyncState: "loading"
+            }
+        }
+
+        case "UPDATE_COMMENT_ERROR": {
+            return {
+                ...state,
+                postAsyncState: "error"
+            }
+        }
+
+        case "DELETE_COMMENT_REQUEST": {
+            return {
+                ...state,
+                postAsyncState: "loading"
+            }
+        }
+
+        case "DELETE_COMMENT_SUCCESS": {
+            const deleteIndex = state.comments.findIndex(comment => comment.id === action.payload.data);
+            return {
+                ...state,
+                comments: [
+                    ...state.comments.slice(0, deleteIndex),
+                    ...state.comments.slice(deleteIndex + 1)
+                ],
+                postAsyncState: "loading"
+            }
+        }
+
+        case "DELETE_COMMENT_ERROR": {
+            return {
+                ...state,
+                postAsyncState: "error"
+            }
+        }
+
         case "CREATE_POST_REQUEST": {
             return {
                 ...state,
