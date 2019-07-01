@@ -21,5 +21,17 @@ Setiap modul paling tidak memiliki Pages, Component, Action Creator, Model, Requ
 
 Pada projek ini digunakan konsep Smart and Dummy Component, dimana di tiap modul terdapat komponen Container (Smart Component) untuk berhubungan Redux. Container bertugas untuk menentukan data dan action apa saja yang bisa diakses oleh suatu modul.
 
-Langkah-langkah instalasi
-1. 
+Note
+1. Disini saya asumsikan pengguna sebagai user dengan userId = 1
+
+Langkah-langkah instalasi untuk Development
+1. masuk ke folder aplikasi
+2. npm install / yarn install
+3. npm start
+
+Langkah-langkah instalasi untuk Production
+1. masuk ke folder aplikasi
+2. npm install / yarn install
+3. npm run build / yarn build
+4. yarn global add serve
+5. serve -s build

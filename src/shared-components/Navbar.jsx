@@ -19,8 +19,9 @@ export default class Navbar extends Component {
     render() {
         const { activeItem } = this.state;
         return (
-            <Menu fixed="top" inverted size="huge">
+            <Menu fixed="top" inverted size="big">
                 <Container>
+                <Menu.Item header>PESBUKER</Menu.Item>
                 <Menu.Item 
                     name='home'
                     active={activeItem === 'home'}
