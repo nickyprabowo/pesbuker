@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Grid, Header, Icon, List, Item, Card } from "semantic-ui-react";
 
+import UserProfile from "../components/UserProfile";
 import PostItem from "../../post/components/PostItem";
 import AlbumItem from '../../photo/components/AlbumItem';
 
@@ -39,41 +40,17 @@ export default class UserDetail extends Component {
 
   render() {
     const {
-      selectedUser: {
-        username,
-        name,
-        email,
-        address,
-        phone,
-        company
-      },
+      selectedUser,
       posts,
       albums
     } = this.props;
       return (
           <Grid stackable>
-            <Grid.Row>
-              <Grid.Column>
-                <Header as='h2' icon textAlign='center'>
-                  <Icon name='user' circular/>
-                  <Header.Content>
-                    {username}
-                    <Header.Subheader>{name}</Header.Subheader>
-                  </Header.Content>
-                </Header>  
-              </Grid.Column>    
-            </Grid.Row>
             <Grid.Row centered>
-              <Grid.Column width={6}>
-                <List>
-                    <List.Item icon='marker' content={address} />
-                    <List.Item icon='phone' content={phone} />
-                    <List.Item
-                        icon='mail'
-                        content={<a href={email}>{email}</a>}
-                    />
-                    <List.Item icon='briefcase' content={company} />
-                </List>
+              <Grid.Column width={5}>
+                <UserProfile
+                  {...selectedUser}
+                />
               </Grid.Column>
             </Grid.Row>
             <Grid.Row>

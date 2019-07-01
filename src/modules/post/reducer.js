@@ -73,6 +73,62 @@ export default function post(state=initialState, action) {
             }
         }
 
+        case "CREATE_POST_REQUEST": {
+            return {
+                ...state,
+                postAsyncState: "loading"
+            }
+        }
+
+        case "CREATE_POST_SUCCESS": {
+            return {
+                ...state,
+                posts: [
+                    action.payload.data,
+                    ...state.posts
+                ],
+                postAsyncState: "loading"
+            }
+        }
+
+        case "CREATE_POST_ERROR": {
+            return {
+                ...state,
+                postAsyncState: "error"
+            }
+        }
+
+        case "UPDATE_POST_REQUEST": {
+            return {
+                ...state,
+                postAsyncState: "loading"
+            }
+        }
+
+        case "UPDATE_POST_SUCCESS": {
+            console.log(action.payload)
+            return {
+                ...state,
+                posts: state.posts.map((post) => {
+                    if( post.id !== action.payload.data.id ){
+                        return post
+                    }
+                    return {
+                        ...post,
+                        ...action.payload.data
+                    }
+                }),
+                postAsyncState: "loading"
+            }
+        }
+
+        case "UPDATE_POST_ERROR": {
+            return {
+                ...state,
+                postAsyncState: "error"
+            }
+        }
+
         case "SELECT_POST": {
             return {
                 ...state,

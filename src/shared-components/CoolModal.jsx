@@ -5,7 +5,8 @@ export default function CoolModal({
     modalOpen,
     handleClose,
     data,
-    renderContent
+    renderContent,
+    renderAction
 }) {
     return (
         <Modal
@@ -19,6 +20,7 @@ export default function CoolModal({
                 {renderContent(data)}
             </Modal.Content>
             <Modal.Actions>
+                {renderAction}
                 <Button onClick={() => handleClose({})} inverted>Close</Button>
             </Modal.Actions>
         </Modal>

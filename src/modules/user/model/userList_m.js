@@ -1,5 +1,7 @@
-const userList = users => {
-    return users.map(user => {
+const userList = users => (
+    users
+    .filter(user => user.id !== 1)
+    .map(user => {
         return {
             userId: user.id,
             username: user.username,
@@ -10,6 +12,6 @@ const userList = users => {
             company: user.company.name
         }
     })
-}
+)
 
 export default userList;
