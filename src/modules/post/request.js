@@ -61,7 +61,7 @@ export const postArticle = article => {
 export const updateArticle = article => {
     return new Promise((resolve, reject) => {
         fetch(`${API.post}/${article.id}`, {
-            method: "PUT",
+            method: "PATCH",
             headers: {
                 "Content-Type": "application/json; charset=UTF-8"
             },
@@ -105,7 +105,7 @@ export const postComment = comment => {
 export const updateComment = comment => {
     return new Promise((resolve, reject) => {
         fetch(`${API.comment}/${comment.id}`, {
-            method: "PUT",
+            method: "PATCH",
             headers: {
                 "Content-Type": "application/json; charset=UTF-8"
             },
