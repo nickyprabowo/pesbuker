@@ -1,3 +1,4 @@
+// fungsi untuk membaca response API
 const handleResponse = response => {
     if(response.ok){
         return response.json();

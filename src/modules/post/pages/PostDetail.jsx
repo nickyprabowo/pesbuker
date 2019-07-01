@@ -6,6 +6,7 @@ import CoolComment from "../components/CoolComment";
 import CommentForm from "../components/CommentForm";
 import CoolModal from "../../../shared-components/CoolModal";
 
+// Komponen untuk menampilkan konten dan komentar dari suatu artikel
 export default class PostDetail extends Component {
     constructor(props){
         super()

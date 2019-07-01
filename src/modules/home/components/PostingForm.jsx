@@ -1,6 +1,7 @@
 import React, {Fragment } from 'react'
 import { Form, Input, TextArea, Button } from "semantic-ui-react";
 
+// Formulir untuk posting artikel
 export default function PostingForm({
     title,
     body,

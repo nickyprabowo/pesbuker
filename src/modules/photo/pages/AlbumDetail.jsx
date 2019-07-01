@@ -5,6 +5,7 @@ import Loading from "../../../shared-components/Loading";
 import AlbumItem from "../components/AlbumItem";
 import CoolModal from "../../../shared-components/CoolModal";
 
+// Komponen untuk menampilkan kumpulan gambar dalam suatu album
 export default class AlbumDetail extends Component {
     constructor(props){
         super();

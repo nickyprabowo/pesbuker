@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, List } from "semantic-ui-react";
 
+// Komponen untuk menampilkan data user dalam bentuk Card
 export default function UserCard({
     userId,
     username,

@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 import { Header, List, Icon } from "semantic-ui-react";
 
+// KOmponen untuk menampilkan profil user
 export default function UserProfile({
     username,
     name,

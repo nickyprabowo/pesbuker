@@ -2,6 +2,7 @@ import React from 'react'
 import { Comment } from "semantic-ui-react";
 import blankProfile from "../../../assets/img/blank-profile.png"
 
+// Komponen ini digunakan untuk menampilkan item komentar
 export default function CoolComment({
     id,
     name,

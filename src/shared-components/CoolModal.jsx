@@ -1,6 +1,7 @@
 import React from 'react'
 import { Modal, Header, Button } from "semantic-ui-react";
 
+// Komponen untuk menampilkan Modal
 export default function CoolModal({
     modalOpen,
     handleClose,

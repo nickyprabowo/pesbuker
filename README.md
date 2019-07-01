@@ -1,68 +1,25 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Aplikasi Pesbuker dibangun Create React App dan menggunakan Redux sebagai State Management dan saya berusaha menyusun projek
+dengan konsep Duck untuk memisahkan fungsionalitas ke dalam beberapa modul, yaitu :
 
-## Available Scripts
+    1. Modul Home
+        - Berisi komponen dan halaman untuk tampilan Home
+    2. Modul Photo 
+        - Berisi komponen, halaman, action creator, dan juga reducer untuk mengolah tampilan foto dan album
+    3. Modul Post
+        - Berisi komponen, halaman, action creator, dan juga reducer untuk mengolah tampilan post dan comment
+    4. Modul User
+        - Berisi komponen, halaman, action creator, dan juga reducer untuk mengolah tampilan user
 
-In the project directory, you can run:
+Setiap modul paling tidak memiliki Pages, Component, Action Creator, Model, Request, dan Reducer nya sendiri. Terkecuali modul Home yang ternyata saat saya buat hanya mengambil fungsionalitas yang telah ada di modul lain.
 
-### `npm start`
+    1. Pages, kumpulan dari berbagai komponen yg membentuk 1 halaman utuh
+    2. Component, bagian kecil dari halaman
+    3. Action Creator, fungsi yang menjadi perantara aplikasi dan Redux
+    4. Model, fungsi untuk memproses data kembalian dari API (data preprocessing). (ex: ubah format tanggal, menyatukan variabel, pengecekan variabel)
+    5. Request, kumpulan fungsi untuk mengakses API
+    6. Reducer, kumpulan fungsi untuk mengubah data di Redux Store
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Pada projek ini digunakan konsep Smart and Dummy Component, dimana di tiap modul terdapat komponen Container (Smart Component) untuk berhubungan Redux. Container bertugas untuk menentukan data dan action apa saja yang bisa diakses oleh suatu modul.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Langkah-langkah instalasi
+1. 

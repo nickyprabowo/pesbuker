@@ -1,6 +1,7 @@
 import React from 'react'
 import { Form, Input, TextArea, Button } from "semantic-ui-react";
 
+// Komponen digunakan untuk mengisikan komentar
 export default function CommentForm({
     name,
     email,

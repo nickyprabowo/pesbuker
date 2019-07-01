@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Image } from "semantic-ui-react";
 
+// Komponen untuk menampilkan single Item dalam bentuk Card
 export default function AlbumItem({
     id,
     title,

@@ -5,6 +5,7 @@ import UserProfile from "../components/UserProfile";
 import PostItem from "../../post/components/PostItem";
 import AlbumItem from '../../photo/components/AlbumItem';
 
+// komponen untuk menampilkan profil , album, dan daftar artikel dari suatu User
 export default class UserDetail extends Component {
   constructor(props){
     super()

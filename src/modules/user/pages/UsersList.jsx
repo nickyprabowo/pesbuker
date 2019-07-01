@@ -4,6 +4,7 @@ import { Grid, Card } from "semantic-ui-react";
 import UserCard from "../components/UserCard";
 import Loading from "../../../shared-components/Loading";
 
+// komponen untuk menampilkan daftar user
 export default class UsersList extends Component {
     constructor(props){
         super();
