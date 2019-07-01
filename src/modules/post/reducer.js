@@ -106,7 +106,6 @@ export default function post(state=initialState, action) {
         }
 
         case "UPDATE_POST_SUCCESS": {
-            console.log(action.payload)
             return {
                 ...state,
                 posts: state.posts.map((post) => {
@@ -123,6 +122,32 @@ export default function post(state=initialState, action) {
         }
 
         case "UPDATE_POST_ERROR": {
+            return {
+                ...state,
+                postAsyncState: "error"
+            }
+        }
+
+        case "DELETE_POST_REQUEST": {
+            return {
+                ...state,
+                postAsyncState: "loading"
+            }
+        }
+
+        case "DELETE_POST_SUCCESS": {
+            const deleteIndex = state.posts.findIndex(post => post.id === action.payload.data);
+            return {
+                ...state,
+                posts: [
+                    ...state.posts.slice(0, deleteIndex),
+                    ...state.posts.slice(deleteIndex + 1)
+                ],
+                postAsyncState: "loading"
+            }
+        }
+
+        case "DELETE_POST_ERROR": {
             return {
                 ...state,
                 postAsyncState: "error"

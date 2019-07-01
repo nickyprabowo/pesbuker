@@ -6,6 +6,8 @@ export default function PostItem({
     title,
     body,
     editable = false,
+    deletable= false,
+    onDelete,
     onEdit,
     onSelect
 }) {
@@ -16,8 +18,8 @@ export default function PostItem({
                 <Item.Description>
                 <p>{body}</p>
                 </Item.Description>
-                {editable &&
                 <Item.Extra>
+                    {editable &&
                     <Button
                         content='Edit'
                         icon='pencil'
@@ -29,8 +31,22 @@ export default function PostItem({
                             body
                         })}
                     />
+                    }
+                    {deletable &&
+                    <Button
+                        content='Delete'
+                        icon='trash'
+                        labelPosition='left'
+                        size="mini"
+                        color="red"
+                        onClick={() => onDelete({
+                            id,
+                            title,
+                            body
+                        })}
+                    />
+                    }
                 </Item.Extra>
-                }
             </Item.Content>
         </Item>
     )

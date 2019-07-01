@@ -21,7 +21,8 @@ export default class Home extends Component {
             title: "",
             body: "",
             editModal: false,
-            editedPost: {}
+            deleteModal: false,
+            selectedPost: {}
         }
     }
 
@@ -40,7 +41,7 @@ export default class Home extends Component {
         })
     }
 
-    handleSubmit = e => {
+    handleSubmitPost = e => {
         e.preventDefault()
         const { title, body } = this.state;
         const { createPost } = this.props;
@@ -62,29 +63,29 @@ export default class Home extends Component {
         const { name, value } = e.target;
 
         this.setState((state) => ({
-            editedPost: {
-                ...state.editedPost,
+            selectedPost: {
+                ...state.selectedPost,
                 [name]: value
             }
         }))
     }
 
-    handleEditPost = post => {
+    selectPostToUpdate = post => {
         this.toggleEditModal();
         this.setState({
-            editedPost: post
+            selectedPost: post
         })
     }
 
     toggleEditModal = () => {
         this.setState((state) => ({
             editModal: !state.editModal,
-            editedPost: {}
+            selectedPost: {}
         }))
     }
 
-    handleUpdate = () => {
-        const { editedPost: { id, title, body } } = this.state;
+    handleUpdatePost = () => {
+        const { selectedPost: { id, title, body } } = this.state;
         const { updatePost } = this.props;
         if(title && body){
             const newPost = {
@@ -95,13 +96,34 @@ export default class Home extends Component {
             }
             updatePost(newPost);
             this.setState({
-                editedPost: {
+                selectedPost: {
                     id: "",
                     title: "",
                     body: ""
                 }
             }, () => this.toggleEditModal())
         }else return
+    }
+
+    toggleDeleteModal = () => {
+        this.setState((state) => ({
+            deleteModal: !state.deleteModal,
+            selectedPost: {}
+        }))
+    }
+
+    selectPostToDelete = post => {
+        this.toggleDeleteModal();
+        this.setState({
+            selectedPost: post
+        })
+    }
+
+    handleDeletePost = () => {
+        const { selectedPost: { id } } = this.state;
+        const { deletePost } = this.props;
+        deletePost(id);
+        this.toggleDeleteModal();
     }
 
     handlePostSelection = id => {
@@ -121,23 +143,31 @@ export default class Home extends Component {
     }
     
     render() {
-        const { title, body, editedPost, editModal } = this.state;
+        const { title, body, selectedPost, editModal, deleteModal } = this.state;
         const { posts, selectedUser, albums } = this.props;
         return (
             <Fragment>
                 <CoolModal 
                     modalOpen={editModal}
                     handleClose={this.toggleEditModal}
-                    data={editedPost}
+                    data={selectedPost}
                     renderContent={(post) => (
                         <EditForm
                             title={post.title}
                             body={post.body}
                             onInputChange={this.handleEditChange}
-                            onSubmit={this.handleUpdate}
                         />
                     )}
-                    renderAction={<Button onClick={() => this.handleUpdate()} primary>Update</Button>}
+                    renderAction={<Button onClick={() => this.handleUpdatePost()} primary>Update</Button>}
+                />
+                <CoolModal 
+                    modalOpen={deleteModal}
+                    handleClose={this.toggleDeleteModal}
+                    data={selectedPost}
+                    renderContent={() => (
+                        <p>Are you sure to delete this post ?</p>
+                    )}
+                    renderAction={<Button onClick={() => this.handleDeletePost()} primary>Delete</Button>}
                 />
                 <Grid stackable>
                     <Grid.Row centered>
@@ -153,8 +183,8 @@ export default class Home extends Component {
                             <PostingForm
                                 title={title}
                                 body={body}
-                                onInputChange={this.handleEditChange}
-                                onSubmit={this.handleSubmit}
+                                onInputChange={this.handleInputChange}
+                                onSubmit={this.handleSubmitPost}
                             />
                         </Grid.Column>
                     </Grid.Row>
@@ -179,7 +209,9 @@ export default class Home extends Component {
                                     key={post.id}
                                     {...post}
                                     editable={true}
-                                    onEdit={this.handleEditPost}
+                                    deletable={true}
+                                    onEdit={this.selectPostToUpdate}
+                                    onDelete={this.selectPostToDelete}
                                     onSelect={this.handlePostSelection}
                                 />
                             ))}

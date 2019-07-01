@@ -4,7 +4,8 @@ import {
     fetchPostsById,
     fetchCommentsByPost,
     postArticle,
-    updateArticle
+    updateArticle,
+    deleteArticle
 } from "./request";
 import postListModel from "./models/postList";
 import postDetailModel from "./models/postDetail";
@@ -28,6 +29,10 @@ const createPostError = makeActionCreator("CREATE_POST_ERROR");
 const updatePostRequest = makeActionCreator("UPDATE_POST_REQUEST");
 const updatePostSuccess = makeActionCreator("UPDATE_POST_SUCCESS");
 const updatePostError = makeActionCreator("UPDATE_POST_ERROR");
+
+const deletePostRequest = makeActionCreator("DELETE_POST_REQUEST");
+const deletePostSuccess = makeActionCreator("DELETE_POST_SUCCESS");
+const deletePostError = makeActionCreator("DELETE_POST_ERROR");
 
 const selectPost = makeActionCreator("SELECT_POST");
 
@@ -68,6 +73,13 @@ export const updatePost = post => dispatch => {
         .then(data => postDetailModel(data))
         .then(cleanData => dispatch(updatePostSuccess({ data: cleanData })))
         .catch(error => dispatch(updatePostError(error)))
+}
+
+export const deletePost = id => dispatch => {
+    dispatch(deletePostRequest());
+    deleteArticle(id)
+        .then(() => dispatch(deletePostSuccess({ data: id })))
+        .catch(error => dispatch(deletePostError(error)))
 }
 
 export const pickPost = (id, cb) => dispatch => {
